@@ -14,13 +14,13 @@ public class OrderService {
 
 	private final OrderRepository repository;
 
-	private final IdempotenteService idempotenteService;
+	private final IdempotenteServiceImpl idempotenteService;
 
 	private final OrderProcessorFactory factory;
 
 	private final RabbitMQProducer rabbitMQService;
 
-	public OrderService(OrderRepository repository, IdempotenteService idempotenteService,
+	public OrderService(OrderRepository repository, IdempotenteServiceImpl idempotenteService,
 			OrderProcessorFactory factory, RabbitMQProducer rabbitMQService) {
 		this.repository = repository;
 		this.idempotenteService = idempotenteService;
@@ -28,7 +28,7 @@ public class OrderService {
 		this.rabbitMQService = rabbitMQService;
 	}
 
-	@Transactional(isolation = Isolation.READ_COMMITTED)
+	@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
 	public OrderEntity process(OrderEntity order, String idempotenteKey) {
 		idempotenteService.validate(idempotenteKey);
 

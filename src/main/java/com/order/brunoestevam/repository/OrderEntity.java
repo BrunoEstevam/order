@@ -27,7 +27,6 @@ public class OrderEntity implements Serializable {
 	public OrderEntity() {
 	}
 
-
 	public OrderEntity(Long id, Long idCustomer, String idempotentKey, String status, List<ItemEntity> items,
 			BigDecimal totalPrice, Date createdAt, Date updatedAt) {
 		this.id = id;
@@ -39,7 +38,6 @@ public class OrderEntity implements Serializable {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

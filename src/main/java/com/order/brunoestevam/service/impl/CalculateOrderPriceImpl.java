@@ -16,7 +16,8 @@ public class CalculateOrderPriceImpl implements CalculateOrderPrice {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		
 		for (ItemEntity item : items) {
-			totalPrice = totalPrice.add(item.getPrice());
+			BigDecimal priceForQuantity = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
+			totalPrice = totalPrice.add(priceForQuantity);
 		}
 		
 		return totalPrice;

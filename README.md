@@ -121,7 +121,7 @@ Content-Type: application/json
 Date: Tue, 05 Mar 2024 19:07:52 GMT
 Keep-Alive: timeout=60
 Transfer-Encoding: chunked
-Idempotency-Key: colocar-uuid
+Idempotency-Key: colocar-alguma-string(exemplo: uuid)
 
 
 {

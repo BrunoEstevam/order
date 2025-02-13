@@ -2,6 +2,8 @@ package com.order.brunoestevam.repository;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,8 @@ public class ItemEntity {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_order")
+	@JsonIgnore
+	@JoinColumn(name = "id_order", referencedColumnName = "id")
 	private OrderEntity order;
 	
 	@Column(name = "quantity")

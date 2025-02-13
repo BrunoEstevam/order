@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.order.brunoestevam.dto.ProcessOrderRequest;
 import com.order.brunoestevam.dto.ProcessOrderResponse;
 import com.order.brunoestevam.mapper.OrderMapper;
-import com.order.brunoestevam.repository.OrderEntity;
-import com.order.brunoestevam.service.impl.OrderService;
+import com.order.brunoestevam.service.impl.OrderProcessingService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -23,9 +22,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RequestMapping("/order")
 public class OrderController {
 
-	private final OrderService service;
+	private final OrderProcessingService service;
 
-	public OrderController(OrderService service) {
+	public OrderController(OrderProcessingService service) {
 		this.service = service;
 	}
 
@@ -34,9 +33,9 @@ public class OrderController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@PostMapping
 	public ResponseEntity<ProcessOrderResponse> process(@RequestBody @Validated ProcessOrderRequest request, @RequestHeader(name = "Idempotency-Key", required = true) String idempotenteKey) {
-		OrderEntity order = service.process(OrderMapper.INSTANCE.mapToEntity(request), idempotenteKey);
+		ProcessOrderResponse response = service.process(OrderMapper.INSTANCE.mapToEntity(request), idempotenteKey);
 		
-		return ResponseEntity.ok(OrderMapper.INSTANCE.mapToResponse(order));
+		return ResponseEntity.ok(response);
 	}
 
 }

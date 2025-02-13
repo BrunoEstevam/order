@@ -6,24 +6,25 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.order.brunoestevam.repository.OrderEntity;
+import com.order.brunoestevam.dto.ProcessOrderResponse;
+import com.order.brunoestevam.service.MessasingProducer;
 
 @Service
-public class RabbitMQProducer {
+public class RabbitMQProducerImpl implements MessasingProducer {
 
 	private final RabbitTemplate rabbitTemplate;
 	private final Gson gson;
 
-	public RabbitMQProducer(RabbitTemplate rabbitTemplate, Gson gson) {
+	public RabbitMQProducerImpl(RabbitTemplate rabbitTemplate, Gson gson) {
 		this.rabbitTemplate = rabbitTemplate;
 		this.gson = gson;
 	}
 
-	public void sendOrderUpdate(OrderEntity order) {
+	public void sendOrderUpdate(ProcessOrderResponse response) {
 		MessageProperties properties = new MessageProperties();
 		properties.setContentType("application/json");
 
-		Message message = new Message(gson.toJson(order).getBytes(), properties);
+		Message message = new Message(gson.toJson(response).getBytes(), properties);
 		rabbitTemplate.send("order.v1.status-change", message);
 	}
 }

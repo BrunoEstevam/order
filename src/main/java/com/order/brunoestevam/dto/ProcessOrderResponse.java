@@ -1,23 +1,34 @@
 package com.order.brunoestevam.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProcessOrderResponse {
-	
+
 	private Long id;
-	
+
 	private Long idCustomer;
 
 	private String status;
 
+	private BigDecimal totalPrice;
+
 	private List<ProcessOrderItemResponse> items;
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public Long getIdCustomer() {

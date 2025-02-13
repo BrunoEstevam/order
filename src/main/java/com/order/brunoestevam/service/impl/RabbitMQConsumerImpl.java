@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.order.brunoestevam.dto.ProcessOrderRequest;
 import com.order.brunoestevam.mapper.OrderMapper;
+import com.order.brunoestevam.service.MessasingConsumer;
 
 @Service
-public class RabbitMQConsumer {
-	private final OrderService orderService;
+public class RabbitMQConsumerImpl implements MessasingConsumer {
+	private final OrderProcessingService orderService;
 	
-	public RabbitMQConsumer(OrderService orderService) {
+	public RabbitMQConsumerImpl(OrderProcessingService orderService) {
 		this.orderService = orderService;
 	}
 

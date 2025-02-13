@@ -2,11 +2,7 @@ package com.order.brunoestevam.repository;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,21 +19,6 @@ import jakarta.persistence.Version;
 public class OrderEntity implements Serializable {
 	
 	private static final long serialVersionUID = -3113035883977568537L;
-
-	public OrderEntity() {
-	}
-
-	public OrderEntity(Long id, Long idCustomer, String idempotentKey, String status, List<ItemEntity> items,
-			BigDecimal totalPrice, Date createdAt, Date updatedAt) {
-		this.id = id;
-		this.idCustomer = idCustomer;
-		this.idempotentKey = idempotentKey;
-		this.status = status;
-		this.items = items;
-		this.totalPrice = totalPrice;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,14 +39,6 @@ public class OrderEntity implements Serializable {
 	@Column(name = "total_price")
     private BigDecimal totalPrice;
 	
-	@CreatedDate 
-	@Column(name = "created_at")
-	private Date createdAt;
-	
-	@LastModifiedDate
-	@Column(name = "updated_at")
-	private Date updatedAt;
-
 	@Version
     private Long version;
 	
@@ -76,17 +49,13 @@ public class OrderEntity implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getIdempotentKey() {
+		return idempotentKey;
+	}
 	
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
+	public void setIdempotentKey(String idempotentKey) {
+		this.idempotentKey = idempotentKey;
 	}
 	
 	public Long getVersion() {
@@ -95,10 +64,6 @@ public class OrderEntity implements Serializable {
 	
 	public void setVersion(Long version) {
 		this.version = version;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public Long getIdCustomer() {

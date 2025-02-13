@@ -29,6 +29,11 @@ public class RabbitMqConfig {
 	Queue queueStatusChange() {
 		return new Queue("order.v1.status-change", true);
 	}
+	
+	@Bean
+	Queue queueProcessorError() {
+		return new Queue("order.v1.processor-error", true);
+	}
 
 	@Bean
 	Queue queueProcessor() {

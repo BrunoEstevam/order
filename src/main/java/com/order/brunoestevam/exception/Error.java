@@ -1,8 +1,8 @@
 package com.order.brunoestevam.exception;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
-public class ApiError {
+public class Error {
 	private int status;
 
 	private String uid;
@@ -11,10 +11,13 @@ public class ApiError {
 	
 	private String exceptionClass;
 
-	private LocalDateTime date;
+	private Date date;
+	
+	public Error() {
+	}
 
-	public ApiError(int status, String uid, String message, String exceptionClass,
-			LocalDateTime date) {
+	public Error(int status, String uid, String message, String exceptionClass,
+			Date date) {
 		this.status = status;
 		this.uid = uid;
 		this.message = message;
@@ -54,11 +57,11 @@ public class ApiError {
 		this.exceptionClass = exceptionClass;
 	}
 
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }

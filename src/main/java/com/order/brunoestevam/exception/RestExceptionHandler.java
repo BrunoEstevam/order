@@ -1,6 +1,6 @@
 package com.order.brunoestevam.exception;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.amqp.rabbit.support.ListenerExecutionFailedException;
@@ -29,7 +29,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         String errorType = t.getClass().getSimpleName();
 
-        ApiError apiError = new ApiError(status.value(), uid, t.getMessage(), errorType, LocalDateTime.now());
+        Error apiError = new Error(status.value(), uid, t.getMessage(), errorType, new Date());
 
         return new ResponseEntity<>(apiError, status);
     }

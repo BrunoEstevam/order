@@ -1,12 +1,11 @@
 package com.order.brunoestevam.service.impl;
 
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.order.brunoestevam.dto.ProcessOrderResponse;
+import com.order.brunoestevam.exception.Error;
 import com.order.brunoestevam.service.MessasingProducer;
 
 @Service
@@ -20,11 +19,13 @@ public class RabbitMQProducerImpl implements MessasingProducer {
 		this.gson = gson;
 	}
 
+	@Override
 	public void sendOrderUpdate(ProcessOrderResponse response) {
-		MessageProperties properties = new MessageProperties();
-		properties.setContentType("application/json");
+		rabbitTemplate.convertAndSend("order.v1.status-change", gson.toJson(response));
+	}
 
-		Message message = new Message(gson.toJson(response).getBytes(), properties);
-		rabbitTemplate.send("order.v1.status-change", message);
+	@Override
+	public void sendOrderError(Error error) {
+		rabbitTemplate.convertAndSend("order.v1.processor-error", gson.toJson(error));
 	}
 }

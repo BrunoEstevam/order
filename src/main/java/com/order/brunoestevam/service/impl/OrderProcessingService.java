@@ -26,11 +26,11 @@ public class OrderProcessingService {
 	private final MessasingProducer messasingProducerService;
 
 	public OrderProcessingService(OrderRepository repository, IdempotenteService idempotenteService,
-			OrderProcessorFactory factory, RabbitMQProducerImpl rabbitMQService) {
+			OrderProcessorFactory factory, MessasingProducer messasingProducerService) {
 		this.repository = repository;
 		this.idempotenteService = idempotenteService;
 		this.factory = factory;
-		this.messasingProducerService = rabbitMQService;
+		this.messasingProducerService = messasingProducerService;
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)

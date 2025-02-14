@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -30,22 +29,20 @@ public class OrderProcessorFactoryTest {
 	private OrderProcessor processor2;
 
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		BDDMockito.lenient().when(processor1.isStatus("cre")).thenReturn(true);
 		BDDMockito.lenient().when(processor2.isStatus("pen")).thenReturn(true);
 		orderProcessorFactory = new OrderProcessorFactory(List.of(processor1, processor2));
 	}
 
 	@Test
-	@DisplayName("Deve retornar o processador do status passado")
-	void shouldingReturnProcessorWhenStatusMatches() {
+	public void shouldingReturnProcessorWhenStatusMatches() {
 		OrderProcessor result = orderProcessorFactory.getProcessor("cre");
 		assertEquals(processor1, result);
 	}
 
 	@Test
-	@DisplayName("Deve dar erro quando não encontrar o status que está sendo passado")
-	void shouldThrowExceptionWhenNoProcessorMatch() {
+	public void shouldThrowExceptionWhenNoProcessorMatch() {
 		InvalidDataException exception = assertThrows(InvalidDataException.class, () -> {
 			orderProcessorFactory.getProcessor("TESTE");
 		});

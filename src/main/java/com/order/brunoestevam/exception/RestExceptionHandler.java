@@ -3,6 +3,7 @@ package com.order.brunoestevam.exception;
 import java.util.Date;
 import java.util.UUID;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.amqp.rabbit.support.ListenerExecutionFailedException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -38,6 +39,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleValidationException(ListenerExecutionFailedException ex) {
     	buildResponseEntity(ex, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleConstraintViolation(ConstraintViolationException ex) {
+        if (ex.getConstraintName().equals("uc_idempotent_key")) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("A chave idempotent_key já existe. Por favor, forneça um valor único.");
+        }
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body("Ocorreu uma violação de restrição no banco de dados.");
     }
     
 	@ExceptionHandler({ InvalidDataException.class })

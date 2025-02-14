@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class OrderControllerTest {
 	}
 
 	@Test
+	@DisplayName("Deve processar e avisar que está faltando o header")
 	public void shouldProcessAndReturnMissingHeader() throws Exception {
 		ProcessOrderResponse response = new ProcessOrderResponse();
 		response.setId(1l);
@@ -60,6 +62,7 @@ public class OrderControllerTest {
 	}
 	
 	@Test
+	@DisplayName("Deve processar e retornar sucesso")
 	public void shouldProcessAndReturnSucess() throws Exception {
 		ProcessOrderResponse response = new ProcessOrderResponse();
 		response.setId(1l);

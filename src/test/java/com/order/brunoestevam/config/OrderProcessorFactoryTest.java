@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -36,12 +37,14 @@ public class OrderProcessorFactoryTest {
 	}
 
 	@Test
-	public void shouldingReturnProcessorWhenStatusMatches() {
+	@DisplayName("Deve retornar processador quando o status bater")
+	public void shouldReturnProcessorWhenStatusMatches() {
 		OrderProcessor result = orderProcessorFactory.getProcessor("cre");
 		assertEquals(processor1, result);
 	}
 
 	@Test
+	@DisplayName("Deve lançar exceção quando o status não bater")
 	public void shouldThrowExceptionWhenNoProcessorMatch() {
 		InvalidDataException exception = assertThrows(InvalidDataException.class, () -> {
 			orderProcessorFactory.getProcessor("TESTE");

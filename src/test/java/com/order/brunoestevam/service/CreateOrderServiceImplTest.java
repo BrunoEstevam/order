@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -27,6 +28,7 @@ public class CreateOrderServiceImplTest {
 	private CalculateOrderPrice calculateOrderPrice;
 	
 	@Test
+	@DisplayName("Deve criar o pedido com status de criado")
 	public void shouldCreateOrderWithStatusOfCreated() {
 		BDDMockito.when(calculateOrderPrice.calculate(anyList())).thenReturn(BigDecimal.TEN);
 		
@@ -42,16 +44,19 @@ public class CreateOrderServiceImplTest {
 	}
 	
 	@Test
+	@DisplayName("Deve retornar verdadeiro quando o status for criado")
 	public void shouldReturnTrueWhenStatusIsCreated() {
 		assertEquals(createOrderServiceImpl.isStatus(OrderStatusEnum.CREATED.getCode()), true);
 	}
 
 	@Test
+	@DisplayName("Deve retornar falso quando o status for diferente de criado")
 	public void shouldReturnFlaseWhenStatusDiferenteFromCreated() {
 		assertEquals(createOrderServiceImpl.isStatus(OrderStatusEnum.COMPLETED.getCode()), false);
 	}
 	
 	@Test
+	@DisplayName("Deve retornar falso quando o status for nulo")
 	public void shouldReturnFalseWhenStatusIsNull() {
 		assertEquals(createOrderServiceImpl.isStatus(null), false);
 	}

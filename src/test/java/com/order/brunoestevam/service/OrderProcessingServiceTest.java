@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
@@ -72,6 +73,7 @@ public class OrderProcessingServiceTest {
 	}
 
 	@Test
+	@DisplayName("Deve processar o pedido")
 	public void shouldProcessOrder() {
 		String idempotenteKey = "test-key";
 

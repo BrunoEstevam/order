@@ -16,10 +16,9 @@ import com.order.brunoestevam.service.MessasingProducer;
 @Service
 public class RabbitMQConsumerImpl implements MessasingConsumer {
 	private final OrderProcessingService orderService;
-	
+
 	private final MessasingProducer producer;
-	
-	
+
 	public RabbitMQConsumerImpl(OrderProcessingService orderService, MessasingProducer producer) {
 		this.orderService = orderService;
 		this.producer = producer;
@@ -29,15 +28,15 @@ public class RabbitMQConsumerImpl implements MessasingConsumer {
 	public void receiveMessage(ProcessOrderRequest request, @Headers Map<String, Object> headers) {
 		try {
 			orderService.process(OrderMapper.INSTANCE.mapToEntity(request), headers.get("Idempotency-Key").toString());
-			
+
 		} catch (Exception e) {
-	        String errorType = e.getClass().getSimpleName();
-	        
+			String errorType = e.getClass().getSimpleName();
+
 			Error error = new Error();
 			error.setDate(new Date());
 			error.setMessages(e.getMessage());
 			error.setExceptionClass(errorType);
-			
+
 			producer.sendOrderError(error);
 		}
 	}

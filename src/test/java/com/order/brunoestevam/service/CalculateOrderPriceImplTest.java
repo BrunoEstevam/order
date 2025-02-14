@@ -23,8 +23,8 @@ public class CalculateOrderPriceImplTest {
 	private CalculateOrderPriceImpl calculateOrderPriceImpl;
 	
 	@Test
-	@DisplayName("Quando salvar deve retornar uma tarefa")
-	private void shouldCalculateListOfItemsAndR() {
+	@DisplayName("Deve calcular e retornar o valor exato")
+	private void shouldCalculateListOfItemsAndRreturExactPrice() {
 		ItemEntity item = new ItemEntity();
 		item.setQuantity(1);
 		item.setPrice(new BigDecimal(10.20));
@@ -46,6 +46,7 @@ public class CalculateOrderPriceImplTest {
 	}
 	
     @Test
+    @DisplayName("Deve calcular e retornar o valor zero para a lista")
     private void shouldReturnZeroPriceForEmptyList() {
         List<ItemEntity> items = Arrays.asList();
         BigDecimal totalPrice = calculateOrderPriceImpl.calculate(items);

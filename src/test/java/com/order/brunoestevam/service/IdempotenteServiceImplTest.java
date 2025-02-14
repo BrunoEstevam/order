@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,6 +25,7 @@ public class IdempotenteServiceImplTest {
 	private StringRedisTemplate redisTemplate;
 
 	@Test
+	@DisplayName("Deve lançar exceção quando a chave existir")
 	public void shouldThrowExceptionWhenKeyExists() {
 		String key = "teste-key";
 		when(redisTemplate.hasKey(key)).thenReturn(true);
@@ -32,6 +34,7 @@ public class IdempotenteServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("Não Deve lançar exceção quando a não chave existir")
 	public void shouldNotThrowExceptionWhenKeyDoesNotExist() {
 		String key = "teste-key";
 		when(redisTemplate.hasKey(key)).thenReturn(false);

@@ -25,7 +25,7 @@ public class CreateOrderServiceImplTest {
 	private CreateOrderServiceImpl createOrderServiceImpl;
 	
 	@Mock
-	private CalculateOrderPrice calculateOrderPrice;
+	private CalculateOrderPriceService calculateOrderPrice;
 	
 	@Test
 	@DisplayName("Deve criar o pedido com status de criado")

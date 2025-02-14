@@ -11,8 +11,8 @@ import com.order.brunoestevam.repository.ItemEntity;
 import com.order.brunoestevam.repository.OrderEntity;
 import com.order.brunoestevam.repository.OrderRepository;
 import com.order.brunoestevam.service.IdempotenteService;
-import com.order.brunoestevam.service.MessasingProducer;
-import com.order.brunoestevam.service.OrderProcessor;
+import com.order.brunoestevam.service.MessasingProducerService;
+import com.order.brunoestevam.service.OrderProcessorService;
 
 @Service
 public class OrderProcessingService {
@@ -23,10 +23,10 @@ public class OrderProcessingService {
 
 	private final OrderProcessorFactory factory;
 
-	private final MessasingProducer messasingProducerService;
+	private final MessasingProducerService messasingProducerService;
 
 	public OrderProcessingService(OrderRepository repository, IdempotenteService idempotenteService,
-			OrderProcessorFactory factory, MessasingProducer messasingProducerService) {
+			OrderProcessorFactory factory, MessasingProducerService messasingProducerService) {
 		this.repository = repository;
 		this.idempotenteService = idempotenteService;
 		this.factory = factory;
@@ -53,7 +53,7 @@ public class OrderProcessingService {
 	}
 
 	private OrderEntity processWithFactory(OrderEntity order) {
-		OrderProcessor orderProcessor = factory.getProcessor(order.getStatus());
+		OrderProcessorService orderProcessor = factory.getProcessor(order.getStatus());
 		return orderProcessor.processor(order);
 	}
 

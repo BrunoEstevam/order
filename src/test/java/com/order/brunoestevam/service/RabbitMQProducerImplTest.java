@@ -17,13 +17,13 @@ import com.google.gson.Gson;
 import com.order.brunoestevam.dto.OrderStatusEnum;
 import com.order.brunoestevam.dto.ProcessOrderResponse;
 import com.order.brunoestevam.exception.Error;
-import com.order.brunoestevam.service.impl.RabbitMQProducerImpl;
+import com.order.brunoestevam.service.impl.RabbitMQProducerServiceImpl;
 
 @ExtendWith(value = MockitoExtension.class)
 public class RabbitMQProducerImplTest {
 
 	@InjectMocks
-	private RabbitMQProducerImpl rabbitMQProducerImpl;
+	private RabbitMQProducerServiceImpl rabbitMQProducerImpl;
 
 	@Mock
 	private RabbitTemplate rabbitTemplate;

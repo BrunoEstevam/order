@@ -3,7 +3,7 @@ package com.order.brunoestevam.service;
 import com.order.brunoestevam.dto.ProcessOrderResponse;
 import com.order.brunoestevam.exception.Error;
 
-public interface MessasingProducer {
+public interface MessasingProducerService {
 
 	void sendOrderUpdate(ProcessOrderResponse response);
 	

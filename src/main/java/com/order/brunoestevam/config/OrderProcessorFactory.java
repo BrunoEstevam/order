@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.order.brunoestevam.exception.InvalidDataException;
-import com.order.brunoestevam.service.OrderProcessor;
+import com.order.brunoestevam.service.OrderProcessorService;
 
 @Component
 public class OrderProcessorFactory {
 	
-    private final List<OrderProcessor> processors;
+    private final List<OrderProcessorService> processors;
 
-    public OrderProcessorFactory(List<OrderProcessor> processors) {
+    public OrderProcessorFactory(List<OrderProcessorService> processors) {
 		this.processors = processors;
 	}
 
-	public OrderProcessor getProcessor(String status) {
+	public OrderProcessorService getProcessor(String status) {
        return processors.stream()
                 .filter(processor -> processor.isStatus(status)) 
                 .findFirst()

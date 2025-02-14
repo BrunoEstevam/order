@@ -7,15 +7,15 @@ import org.springframework.util.StringUtils;
 
 import com.order.brunoestevam.dto.OrderStatusEnum;
 import com.order.brunoestevam.repository.OrderEntity;
-import com.order.brunoestevam.service.CalculateOrderPrice;
-import com.order.brunoestevam.service.OrderProcessor;
+import com.order.brunoestevam.service.CalculateOrderPriceService;
+import com.order.brunoestevam.service.OrderProcessorService;
 
 @Service
-public class CreateOrderServiceImpl implements OrderProcessor {
+public class CreateOrderServiceImpl implements OrderProcessorService {
 
-	private final CalculateOrderPrice calculateOrderPrice;
+	private final CalculateOrderPriceService calculateOrderPrice;
 	
-	public CreateOrderServiceImpl(CalculateOrderPrice calculateOrderPrice) {
+	public CreateOrderServiceImpl(CalculateOrderPriceService calculateOrderPrice) {
 		this.calculateOrderPrice = calculateOrderPrice;
 	}
 

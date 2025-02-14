@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.order.brunoestevam.repository.ItemEntity;
-import com.order.brunoestevam.service.CalculateOrderPrice;
+import com.order.brunoestevam.service.CalculateOrderPriceService;
 
 @Service
-public class CalculateOrderPriceImpl implements CalculateOrderPrice {
+public class CalculateOrderPriceServiceImpl implements CalculateOrderPriceService {
 
 	@Override
 	public BigDecimal calculate(List<ItemEntity> items) {

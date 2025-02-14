@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.order.brunoestevam.dto.ProcessOrderResponse;
 import com.order.brunoestevam.exception.Error;
-import com.order.brunoestevam.service.MessasingProducer;
+import com.order.brunoestevam.service.MessasingProducerService;
 
 @Service
-public class RabbitMQProducerImpl implements MessasingProducer {
+public class RabbitMQProducerServiceImpl implements MessasingProducerService {
 
 	private final RabbitTemplate rabbitTemplate;
 	private final Gson gson;
 
-	public RabbitMQProducerImpl(RabbitTemplate rabbitTemplate, Gson gson) {
+	public RabbitMQProducerServiceImpl(RabbitTemplate rabbitTemplate, Gson gson) {
 		this.rabbitTemplate = rabbitTemplate;
 		this.gson = gson;
 	}

@@ -43,13 +43,13 @@ public class OrderProcessingServiceTest {
 	private OrderProcessorFactory factory;
 
 	@Mock
-	private MessasingProducer messasingProducerService;
+	private MessasingProducerService messasingProducerService;
 
 	@Mock
 	private OrderMapper orderMapper;
 
 	@Mock
-	private OrderProcessor orderProcessor;
+	private OrderProcessorService orderProcessor;
 
 	private OrderEntity order;
 

@@ -18,19 +18,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.order.brunoestevam.dto.ProcessOrderRequest;
 import com.order.brunoestevam.service.impl.OrderProcessingService;
-import com.order.brunoestevam.service.impl.RabbitMQConsumerImpl;
+import com.order.brunoestevam.service.impl.RabbitMQConsumerServiceImpl;
 
 @ExtendWith(value = MockitoExtension.class)
 public class RabbitMQConsumerImplTest {
 
 	@InjectMocks
-	private RabbitMQConsumerImpl rabbitMQConsumerImpl;
+	private RabbitMQConsumerServiceImpl rabbitMQConsumerImpl;
 
 	@Mock
 	private OrderProcessingService orderService;
 
 	@Mock
-	private MessasingProducer messasingProducer;
+	private MessasingProducerService messasingProducer;
 
 	@Test
 	public void shouldReceiveMessageWithSucess() {

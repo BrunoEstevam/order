@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import com.order.brunoestevam.dto.ProcessOrderRequest;
 import com.order.brunoestevam.exception.Error;
 import com.order.brunoestevam.mapper.OrderMapper;
-import com.order.brunoestevam.service.MessasingConsumer;
-import com.order.brunoestevam.service.MessasingProducer;
+import com.order.brunoestevam.service.MessasingConsumerService;
+import com.order.brunoestevam.service.MessasingProducerService;
 
 @Service
-public class RabbitMQConsumerImpl implements MessasingConsumer {
+public class RabbitMQConsumerServiceImpl implements MessasingConsumerService {
 	private final OrderProcessingService orderService;
 
-	private final MessasingProducer producer;
+	private final MessasingProducerService producer;
 
-	public RabbitMQConsumerImpl(OrderProcessingService orderService, MessasingProducer producer) {
+	public RabbitMQConsumerServiceImpl(OrderProcessingService orderService, MessasingProducerService producer) {
 		this.orderService = orderService;
 		this.producer = producer;
 	}

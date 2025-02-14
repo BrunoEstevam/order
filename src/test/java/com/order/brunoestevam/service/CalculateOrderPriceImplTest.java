@@ -14,13 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.order.brunoestevam.repository.ItemEntity;
-import com.order.brunoestevam.service.impl.CalculateOrderPriceImpl;
+import com.order.brunoestevam.service.impl.CalculateOrderPriceServiceImpl;
 
 @ExtendWith(value = MockitoExtension.class)
 public class CalculateOrderPriceImplTest {
 	
 	@InjectMocks
-	private CalculateOrderPriceImpl calculateOrderPriceImpl;
+	private CalculateOrderPriceServiceImpl calculateOrderPriceImpl;
 	
 	@Test
 	@DisplayName("Deve calcular e retornar o valor exato")

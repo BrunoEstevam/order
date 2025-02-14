@@ -2,7 +2,7 @@ package com.order.brunoestevam.service;
 
 import com.order.brunoestevam.repository.OrderEntity;
 
-public interface OrderProcessor  {
+public interface OrderProcessorService  {
 	
     boolean isStatus(String status);
 

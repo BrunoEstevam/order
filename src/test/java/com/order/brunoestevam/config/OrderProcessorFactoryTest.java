@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.order.brunoestevam.exception.InvalidDataException;
-import com.order.brunoestevam.service.OrderProcessor;
+import com.order.brunoestevam.service.OrderProcessorService;
 
 @ExtendWith(MockitoExtension.class)
 public class OrderProcessorFactoryTest {
@@ -24,10 +24,10 @@ public class OrderProcessorFactoryTest {
 	private OrderProcessorFactory orderProcessorFactory;
 
 	@Mock
-	private OrderProcessor processor1;
+	private OrderProcessorService processor1;
 
 	@Mock
-	private OrderProcessor processor2;
+	private OrderProcessorService processor2;
 
 	@BeforeEach
 	public void setUp() {
@@ -39,7 +39,7 @@ public class OrderProcessorFactoryTest {
 	@Test
 	@DisplayName("Deve retornar processador quando o status bater")
 	public void shouldReturnProcessorWhenStatusMatches() {
-		OrderProcessor result = orderProcessorFactory.getProcessor("cre");
+		OrderProcessorService result = orderProcessorFactory.getProcessor("cre");
 		assertEquals(processor1, result);
 	}
 

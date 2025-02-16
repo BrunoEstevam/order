@@ -46,6 +46,8 @@
 
 A aplicação utiliza o padrão de design Strategy, onde a classe responsável pelo processamento do pedido é selecionada com base no seu status. Isso permite que a lógica de processamento seja facilmente alterada ou estendida, possibilitando a adição de novas etapas, como Expedição, Cancelamento, Pagamento, entre outras, ou a modificação das etapas existentes no fluxo do pedido, sem causar impactos significativos no código. Essa abordagem proporciona maior flexibilidade, facilitando a manutenção e adaptação da aplicação a novas demandas ou requisitos no futuro.
 
+Optei por uma arquitetura em camadas (Controller, Service e Repository) por oferecer organização e modularidade. A separação em camadas define claramente as responsabilidades de cada uma, evitando abstrações desnecessárias. Como a aplicação é relativamente simples, essa estrutura agiliza o desenvolvimento e facilita a manutenção, além de permitir uma migração fácil para abordagens mais robustas, como a Clean Architecture, conforme a necessidade.
+
 <h4> Banco de dados </h4>
 
 O desafio consistia em desenvolver uma aplicação capaz de suportar até 200 mil pedidos por dia.

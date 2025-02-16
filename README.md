@@ -44,6 +44,8 @@
 
 ### Descrição das soluções
 
+A aplicação utiliza o padrão de design Strategy, onde a classe responsável pelo processamento do pedido é selecionada com base no seu status. Isso permite que a lógica de processamento seja facilmente alterada ou estendida, possibilitando a adição de novas etapas, como Expedição, Cancelamento, Pagamento, entre outras, ou a modificação das etapas existentes no fluxo do pedido, sem causar impactos significativos no código. Essa abordagem proporciona maior flexibilidade, facilitando a manutenção e adaptação da aplicação a novas demandas ou requisitos no futuro.
+
 <h4> Banco de dados </h4>
 
 O desafio consistia em desenvolver uma aplicação capaz de suportar até 200 mil pedidos por dia.
@@ -104,8 +106,6 @@ Para resolver o problema de duplicidade de pedidos, foi aplicado o conceito de I
 Para garantir a alta disponibilidade da aplicação, podemos optar por um serviço em cloud com auto scaling. Esse recurso permite que a aplicação se ajuste automaticamente à demanda, escalando os recursos para cima ou para baixo conforme necessário, garantindo desempenho ideal mesmo em picos de tráfego, e otimizando os custos durante períodos de baixa demanda.
 
 O cache Redis foi pensado para compartilhamento entre diversas instâncias.
-
-A aplicação adota o conceito de Strategy, onde a implementação da classe responsável pelo processamento do pedido é determinada de acordo com seu status. Isso significa que a lógica de processamento pode ser facilmente alterada ou estendida, permitindo adicionar novas etapas ou modificar as existentes no fluxo de processamento do pedido sem grandes impactos no código. Essa abordagem facilita a manutenção e a adaptação da aplicação para novas demandas ou requisitos futuros
 
 
 ## Order Endpoint

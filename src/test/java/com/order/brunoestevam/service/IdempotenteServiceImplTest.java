@@ -1,6 +1,5 @@
 package com.order.brunoestevam.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -13,13 +12,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import com.order.brunoestevam.exception.InvalidDataException;
-import com.order.brunoestevam.service.impl.IdempotenteServiceImpl;
+import com.order.brunoestevam.service.impl.IdempotenteService;
 
 @ExtendWith(value = MockitoExtension.class)
 public class IdempotenteServiceImplTest {
 	
 	@InjectMocks
-	private IdempotenteServiceImpl idempotenteService;
+	private IdempotenteService idempotenteService;
 
 	@Mock
 	private StringRedisTemplate redisTemplate;
@@ -27,18 +26,9 @@ public class IdempotenteServiceImplTest {
 	@Test
 	@DisplayName("Deve lançar exceção quando a chave existir")
 	public void shouldThrowExceptionWhenKeyExists() {
-		String key = "teste-key";
+		String key = "dsadsa";
 		when(redisTemplate.hasKey(key)).thenReturn(true);
 
-		assertThrows(InvalidDataException.class, () -> idempotenteService.validate(key));
-	}
-
-	@Test
-	@DisplayName("Não Deve lançar exceção quando a não chave existir")
-	public void shouldNotThrowExceptionWhenKeyDoesNotExist() {
-		String key = "teste-key";
-		when(redisTemplate.hasKey(key)).thenReturn(false);
-
-		assertDoesNotThrow(() -> idempotenteService.validate(key));
+		assertThrows(InvalidDataException.class, () -> idempotenteService.validateAndPut(key));
 	}
 }

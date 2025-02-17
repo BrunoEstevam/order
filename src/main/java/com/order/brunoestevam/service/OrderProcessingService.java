@@ -2,8 +2,7 @@ package com.order.brunoestevam.service;
 
 import com.order.brunoestevam.dto.OrderMessageRequest;
 
-public interface MessasingConsumerService {
+public interface OrderProcessingService {
 
-	void receiveMessage(OrderMessageRequest request);
-
+	void process(OrderMessageRequest request);
 }

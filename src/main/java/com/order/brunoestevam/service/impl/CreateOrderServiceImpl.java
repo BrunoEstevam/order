@@ -14,6 +14,7 @@ import com.order.brunoestevam.service.OrderProcessorService;
 public class CreateOrderServiceImpl implements OrderProcessorService {
 
 	private final CalculateOrderPriceService calculateOrderPrice;
+
 	
 	public CreateOrderServiceImpl(CalculateOrderPriceService calculateOrderPrice) {
 		this.calculateOrderPrice = calculateOrderPrice;
@@ -31,7 +32,7 @@ public class CreateOrderServiceImpl implements OrderProcessorService {
 
 	@Override
 	public boolean isStatus(String status) {
-		return StringUtils.hasLength(status) && status.equals(OrderStatusEnum.CREATED.getCode());
+		return StringUtils.hasLength(status) && status.equals(OrderStatusEnum.PENDING.getCode());
 	}
 
 }

@@ -54,6 +54,8 @@ O desafio consistia em desenvolver uma aplicação capaz de suportar até 200 mi
 
 Foi considerado um volume de 400 mil pedidos diários, o que resultaria em um total de aproximadamente 4,63 transações por segundo (TPS). Com essa quantidade de transações, não há necessidade de utilizar um banco de dados não relacional.
 
+O serviço utiliza de índices em bancos de dados para melhorar a performance das consultas, permitindo que o sistema encontre dados mais rapidamente sem precisar escanear todas as linhas das tabelas.
+
 Dessa forma, a escolha por um banco relacional foi preferida devido aos seguintes fatores:
 
 <table border="1">
@@ -97,7 +99,7 @@ Dessa forma, a escolha por um banco relacional foi preferida devido aos seguinte
 
 <h4> Comunicação </h4>
 
-A aplicação foi projetada para receber dados de pedidos de duas formas: através de uma API REST ou via mensageria, permitindo uma arquitetura híbrida.
+Quando a aplicação recebe uma requisição POST /order de um serviço externo, ela primeiro verifica no Redis se aquele pedido já foi processado para evitar duplicidade. Caso seja um novo pedido, a aplicação o salva no banco de dados PostgreSQL e, em seguida, o coloca em uma fila do RabbitMQ para processamento assíncrono. Um consumidor chamado "Order Processor" lê essa fila, processa o pedido e pode se comunicar com um serviço externo através do RabbitMQ. Após o processamento, a aplicação atualiza o banco de dados com o resultado, garantindo que o status do pedido reflita corretamente o que aconteceu no fluxo.
 
 Para a comunicação com o serviço B, foi pensado em uma mensageria com RabbitMQ, proporcionando mais segurança para reprocessamentos e tolerância a falhas.
 
@@ -147,4 +149,5 @@ Idempotency-Key: colocar-alguma-string(exemplo: uuid)
 ### Observações
 
 - Certifique-se de ter o **Docker** instalado e configurado corretamente.
+- Dentro da pasta de resource terá uma collection do postman com todas as chamadas REST
 - O Swagger estará disponível para documentação da API em `http://localhost:8080/swagger-ui/index.html#/`.

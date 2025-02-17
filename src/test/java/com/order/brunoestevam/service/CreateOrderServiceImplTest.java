@@ -44,14 +44,14 @@ public class CreateOrderServiceImplTest {
 	}
 	
 	@Test
-	@DisplayName("Deve retornar verdadeiro quando o status for criado")
-	public void shouldReturnTrueWhenStatusIsCreated() {
-		assertEquals(createOrderServiceImpl.isStatus(OrderStatusEnum.CREATED.getCode()), true);
+	@DisplayName("Deve retornar verdadeiro quando o status for pendente")
+	public void shouldReturnTrueWhenStatusIsPending() {
+		assertEquals(createOrderServiceImpl.isStatus(OrderStatusEnum.PENDING.getCode()), true);
 	}
 
 	@Test
-	@DisplayName("Deve retornar falso quando o status for diferente de criado")
-	public void shouldReturnFlaseWhenStatusDiferenteFromCreated() {
+	@DisplayName("Deve retornar falso quando o status for diferente de pendente")
+	public void shouldReturnFlaseWhenStatusDiferenteFromPending() {
 		assertEquals(createOrderServiceImpl.isStatus(OrderStatusEnum.COMPLETED.getCode()), false);
 	}
 	

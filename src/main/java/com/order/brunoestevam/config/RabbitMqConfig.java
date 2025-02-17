@@ -29,47 +29,58 @@ public class RabbitMqConfig {
 	Queue queueStatusChange() {
 		return new Queue("order.v1.status-change", true);
 	}
-	
-	@Bean
-	Queue queueProcessorError() {
-		return new Queue("order.v1.processor-error", true);
-	}
 
 	@Bean
 	Queue queueProcessor() {
 		return QueueBuilder.durable("order.v1.processor").withArgument("x-message-ttl", 60000)
-				.withArgument("x-max-retries", 3).build();
+				.withArgument("x-max-retries", 1).withArgument("x-dead-letter-exchange", "order.v1.exchange.dlx")
+				.withArgument("x-dead-letter-routing-key", "processor-dlq").build();
 	}
-	
+
+	@Bean
+	Queue queueProcessorDlq() {
+		return QueueBuilder.durable("order.v1.processor.dlq").build();
+	}
+
 	@Bean
 	MessageConverter jsonMessageConverter() {
-	    return new Jackson2JsonMessageConverter();
+		return new Jackson2JsonMessageConverter();
 	}
-	
+
 	@Bean
 	RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-	    RabbitTemplate template = new RabbitTemplate(connectionFactory);
-	    template.setMessageConverter(jsonMessageConverter());
-	    return template;
+		RabbitTemplate template = new RabbitTemplate(connectionFactory);
+		template.setMessageConverter(jsonMessageConverter());
+		return template;
 	}
-	
+
 	@Bean
 	RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
-	    SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-	    factory.setConnectionFactory(connectionFactory);
-	    factory.setMessageConverter(jsonMessageConverter());
+		SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+		factory.setConnectionFactory(connectionFactory);
+		factory.setMessageConverter(jsonMessageConverter());
 
-	    return factory;
+		return factory;
 	}
-	
+
 	@Bean
 	DirectExchange orderExchange() {
 		return new DirectExchange("order.v1.exchange", true, false);
 	}
-	
+
+	@Bean
+	DirectExchange orderExchangeDlx() {
+		return new DirectExchange("order.v1.exchange.dlx", true, false);
+	}
+
 	@Bean
 	Binding bindingStatusChange(Queue queueStatusChange, DirectExchange orderExchange) {
 		return BindingBuilder.bind(queueStatusChange).to(orderExchange).with("status-change");
+	}
+
+	@Bean
+	Binding bindingProcessorDlq(Queue queueProcessorDlq, DirectExchange orderExchangeDlx) {
+		return BindingBuilder.bind(queueProcessorDlq).to(orderExchangeDlx).with("processor-dlq");
 	}
 
 	@Bean

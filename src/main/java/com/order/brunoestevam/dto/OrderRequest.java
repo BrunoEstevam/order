@@ -5,17 +5,14 @@ import java.util.List;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-public class ProcessOrderRequest {
+public class OrderRequest {
 	
 	@NotNull(message = "customer id field is mandatory")
 	private Long idCustomer;
 
-	@NotNull(message = "status id field is mandatory")
-	private String status;
-
 	@Valid
 	@NotNull(message = "item is mandatory") 
-	private List<ProcessOrderItemRequest> items;
+	private List<OrderItemRequest> items;
 
 	public Long getIdCustomer() {
 		return idCustomer;
@@ -25,19 +22,11 @@ public class ProcessOrderRequest {
 		this.idCustomer = idCustomer;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public List<ProcessOrderItemRequest> getItems() {
+	public List<OrderItemRequest> getItems() {
 		return items;
 	}
 
-	public void setItems(List<ProcessOrderItemRequest> items) {
+	public void setItems(List<OrderItemRequest> items) {
 		this.items = items;
 	}
 }

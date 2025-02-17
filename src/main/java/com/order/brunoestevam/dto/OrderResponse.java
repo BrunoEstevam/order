@@ -1,9 +1,8 @@
 package com.order.brunoestevam.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-public class ProcessOrderResponse {
+public class OrderResponse {
 
 	private Long id;
 
@@ -11,9 +10,7 @@ public class ProcessOrderResponse {
 
 	private String status;
 
-	private BigDecimal totalPrice;
-
-	private List<ProcessOrderItemResponse> items;
+	private List<OrderItemResponse> items;
 
 	public Long getId() {
 		return id;
@@ -21,14 +18,6 @@ public class ProcessOrderResponse {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public Long getIdCustomer() {
@@ -47,11 +36,11 @@ public class ProcessOrderResponse {
 		this.status = status;
 	}
 
-	public List<ProcessOrderItemResponse> getItems() {
+	public List<OrderItemResponse> getItems() {
 		return items;
 	}
 
-	public void setItems(List<ProcessOrderItemResponse> items) {
+	public void setItems(List<OrderItemResponse> items) {
 		this.items = items;
 	}
 }

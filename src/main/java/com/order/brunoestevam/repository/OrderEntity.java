@@ -7,41 +7,46 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Version;
 
 @Entity
-@Table(name = "tb_order")
+@Table(name = "tb_order", indexes = { @Index(name = "idx_order_status", columnList = "status"),
+		@Index(name = "idx_order_id_customer", columnList = "id_customer") }, uniqueConstraints = {
+				@UniqueConstraint(name = "uk_idempotent_key", columnNames = { "idempotent_key" }) })
 public class OrderEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = -3113035883977568537L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-	
+	private Long id;
+
 	@Column(name = "id_customer")
-    private Long idCustomer;
-	
+	private Long idCustomer;
+
 	@Column(name = "idempotent_key")
 	private String idempotentKey;
-    
+
 	@Column(name = "status")
-    private String status;
-    
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemEntity> items;
-    
-	@Column(name = "total_price")
-    private BigDecimal totalPrice;
-	
+	private String status;
+
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ItemEntity> items;
+
+	@Column(name = "total_price", nullable = true)
+	private BigDecimal totalPrice;
+
 	@Version
-    private Long version;
-	
+	private Long version;
+
 	public Long getId() {
 		return id;
 	}
@@ -53,15 +58,15 @@ public class OrderEntity implements Serializable {
 	public String getIdempotentKey() {
 		return idempotentKey;
 	}
-	
+
 	public void setIdempotentKey(String idempotentKey) {
 		this.idempotentKey = idempotentKey;
 	}
-	
+
 	public Long getVersion() {
 		return version;
 	}
-	
+
 	public void setVersion(Long version) {
 		this.version = version;
 	}
@@ -69,7 +74,7 @@ public class OrderEntity implements Serializable {
 	public Long getIdCustomer() {
 		return idCustomer;
 	}
-	
+
 	public void setIdCustomer(Long idCustomer) {
 		this.idCustomer = idCustomer;
 	}

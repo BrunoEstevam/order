@@ -5,6 +5,7 @@ public enum OrderStatusEnum {
 	CREATED("cre", "created", "O item está ativo e disponível."),
 	INACTIVE("ina", "inactive", "O item está inativo e não disponível."),
 	PENDING("pen", "pending", "O item está aguardando alguma ação."),
+	ERROR("err", "error", "O item está com algum erro"),
 	COMPLETED("con", "completed", "O item foi concluído.");
 
 	private final String code;

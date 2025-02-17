@@ -1,6 +1,7 @@
 package com.order.brunoestevam.exception;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -41,17 +42,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     	buildResponseEntity(ex, HttpStatus.BAD_REQUEST);
     }
     
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void handleValidationException(NoSuchElementException ex) {
+    	buildResponseEntity(ex, HttpStatus.NOT_FOUND);
+    }
+    
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleConstraintViolation(ConstraintViolationException ex) {
-        if (ex.getConstraintName().equals("uc_idempotent_key")) {
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("A chave idempotent_key já existe. Por favor, forneça um valor único.");
-        }
-        return ResponseEntity
-            .status(HttpStatus.BAD_REQUEST)
-            .body("Ocorreu uma violação de restrição no banco de dados.");
+    public void handleConstraintViolation(ConstraintViolationException ex) {
+    	buildResponseEntity(ex, HttpStatus.NOT_FOUND);
     }
     
 	@ExceptionHandler({ InvalidDataException.class })

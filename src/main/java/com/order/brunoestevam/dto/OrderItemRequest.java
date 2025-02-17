@@ -2,24 +2,22 @@ package com.order.brunoestevam.dto;
 
 import java.math.BigDecimal;
 
-public class ProcessOrderItemResponse {
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+public class OrderItemRequest {
 	
-	private Long id;
-	
+	@Min(value = 1, message = "quantity must be greater than 0")
+	@NotNull(message = "quantity is mandatory")
 	private Integer quantity;
 
 	private String description;
 
+	@Positive(message = "The total value must be greater than zero")
+	@NotNull(message = "price is mandatory")
 	private BigDecimal price;
 
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public Integer getQuantity() {
 		return quantity;
 	}

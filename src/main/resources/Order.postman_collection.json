@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "34310f8c-3a16-42d9-8dd0-a5922330afe6",
+		"name": "Order",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36934361"
+	},
+	"item": [
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Idempotency-Key",
+								"value": "<string>",
+								"description": "(Required) "
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCustomer\": \"<long>\",\n  \"items\": [\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cria um novo pedido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Idempotency-Key",
+										"value": "<string>",
+										"description": "(Required) "
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idCustomer\": \"<long>\",\n  \"items\": [\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<long>\",\n  \"idCustomer\": \"<long>\",\n  \"status\": \"<string>\",\n  \"items\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"price\": \"<number>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"price\": \"<number>\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Caso algum dado sejá inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Idempotency-Key",
+										"value": "<string>",
+										"description": "(Required) "
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idCustomer\": \"<long>\",\n  \"items\": [\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Idempotency-Key",
+										"value": "<string>",
+										"description": "(Required) "
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idCustomer\": \"<long>\",\n  \"items\": [\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "find By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/order/1702",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"1702"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Consulta pedidos por id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/order/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<long>\",\n  \"idCustomer\": \"<long>\",\n  \"status\": \"<string>\",\n  \"items\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"price\": \"<number>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"price\": \"<number>\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/order/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Caso não encontre",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/order/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"order",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

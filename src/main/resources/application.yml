@@ -20,6 +20,10 @@ spring:
     port: 5672
     username: rabbitmq
     password: pass123	
-
+    listener:
+      simple:
+        default-requeue-rejected: false
+        retry:
+          enabled: false
 springdoc:
   swagger-ui.path: /swagger-ui-custom.html		

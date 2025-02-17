@@ -111,35 +111,6 @@ Para garantir a alta disponibilidade da aplicação, podemos optar por um servi�
 
 O cache Redis foi pensado para compartilhamento entre diversas instâncias.
 
-
-## Order Endpoint
-
-Este body pode ser utilizado tanto na API quanto na mensageria. A Idempotency-Key deve ser fornecida no header.
-
-**URL**: `http://localhost:8080/order`
-
-```http
-HTTP/1.1 200 OK
-Connection: keep-alive
-Content-Type: application/json
-Date: Tue, 05 Mar 2024 19:07:52 GMT
-Keep-Alive: timeout=60
-Transfer-Encoding: chunked
-Idempotency-Key: colocar-alguma-string(exemplo: uuid)
-
-
-{
-  "idCustomer": 12213,
-  "status": "cre",
-  "items": [
-    {
-      "quantity": 1,
-      "description": "string",
-      "price": 1
-    }
-  ]
-}
-```
 ## Arquitetura
 ![Desenho de Arquitetura](./src/main/resources/arch.png)
 

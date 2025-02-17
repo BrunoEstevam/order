@@ -141,7 +141,6 @@ Idempotency-Key: colocar-alguma-string(exemplo: uuid)
 }
 ```
 ## Arquitetura
-
 ![Desenho de Arquitetura](./src/main/resources/arch.png)
 
 

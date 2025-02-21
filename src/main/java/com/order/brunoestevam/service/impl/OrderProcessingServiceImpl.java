@@ -1,5 +1,8 @@
 package com.order.brunoestevam.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +19,8 @@ import com.order.brunoestevam.service.OrderProcessorService;
 
 @Service
 public class OrderProcessingServiceImpl implements OrderProcessingService {
-	
+
+	private static final Logger log = LoggerFactory.getLogger(OrderProcessingServiceImpl.class);
 	private final OrderProcessorFactory factory;
 	
 	private final OrderRepository orderRepository;
@@ -34,7 +38,7 @@ public class OrderProcessingServiceImpl implements OrderProcessingService {
 	@Transactional
 	public void process(OrderMessageRequest request) {
 		OrderEntity order = orderRepository.findById(request.getId()).orElseThrow();
-		
+
 		try {
 			getProcessorForOrderStatus(order);
 			messasingProducerService.sendOrderUpdate(OrderMapper.INSTANCE.mapToResponse(order));

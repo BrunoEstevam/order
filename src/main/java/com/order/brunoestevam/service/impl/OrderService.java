@@ -47,7 +47,7 @@ public class OrderService {
 		}
 	}
 
-	public OrderEntity findById(Long id) {
+	public OrderEntity findById(Long id) throws InterruptedException {
 		return repository.findById(id).orElseThrow();
 	}
 }

@@ -15,15 +15,31 @@ spring:
       port: 6379
   cache:
     type: redis
-  rabbitmq: 
+  rabbitmq:
     host: localhost
     port: 5672
     username: rabbitmq
-    password: pass123	
-    listener:
-      simple:
-        default-requeue-rejected: false
-        retry:
-          enabled: false
+    password: pass123
+
 springdoc:
-  swagger-ui.path: /swagger-ui-custom.html		
+  swagger-ui.path: /swagger-ui-custom.html
+
+tracing:
+  url: http://localhost:4318/v1/traces
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'

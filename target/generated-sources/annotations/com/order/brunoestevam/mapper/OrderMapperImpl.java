@@ -1,9 +1,9 @@
 package com.order.brunoestevam.mapper;
 
-import com.order.brunoestevam.dto.ProcessOrderItemRequest;
-import com.order.brunoestevam.dto.ProcessOrderItemResponse;
-import com.order.brunoestevam.dto.ProcessOrderRequest;
-import com.order.brunoestevam.dto.ProcessOrderResponse;
+import com.order.brunoestevam.dto.OrderItemRequest;
+import com.order.brunoestevam.dto.OrderItemResponse;
+import com.order.brunoestevam.dto.OrderRequest;
+import com.order.brunoestevam.dto.OrderResponse;
 import com.order.brunoestevam.repository.ItemEntity;
 import com.order.brunoestevam.repository.OrderEntity;
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-13T14:55:34-0300",
-    comments = "version: 1.5.2.Final, compiler: Eclipse JDT (IDE) 3.40.0.v20241112-0530, environment: Java 21.0.5 (Eclipse Adoptium)"
+    date = "2025-02-19T10:51:03-0300",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 public class OrderMapperImpl implements OrderMapper {
 
     @Override
-    public OrderEntity mapToEntity(ProcessOrderRequest request) {
+    public OrderEntity mapToEntity(OrderRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -26,120 +26,118 @@ public class OrderMapperImpl implements OrderMapper {
         OrderEntity orderEntity = new OrderEntity();
 
         orderEntity.setIdCustomer( request.getIdCustomer() );
-        orderEntity.setStatus( request.getStatus() );
-        orderEntity.setItems( processOrderItemRequestListToItemEntityList( request.getItems() ) );
+        orderEntity.setItems( orderItemRequestListToItemEntityList( request.getItems() ) );
 
         return orderEntity;
     }
 
     @Override
-    public ProcessOrderRequest mapToRequest(OrderEntity request) {
+    public OrderRequest mapToRequest(OrderEntity request) {
         if ( request == null ) {
             return null;
         }
 
-        ProcessOrderRequest processOrderRequest = new ProcessOrderRequest();
+        OrderRequest orderRequest = new OrderRequest();
 
-        processOrderRequest.setIdCustomer( request.getIdCustomer() );
-        processOrderRequest.setStatus( request.getStatus() );
-        processOrderRequest.setItems( itemEntityListToProcessOrderItemRequestList( request.getItems() ) );
+        orderRequest.setIdCustomer( request.getIdCustomer() );
+        orderRequest.setItems( itemEntityListToOrderItemRequestList( request.getItems() ) );
 
-        return processOrderRequest;
+        return orderRequest;
     }
 
     @Override
-    public ProcessOrderResponse mapToResponse(OrderEntity entity) {
+    public OrderResponse mapToResponse(OrderEntity entity) {
         if ( entity == null ) {
             return null;
         }
 
-        ProcessOrderResponse processOrderResponse = new ProcessOrderResponse();
+        OrderResponse orderResponse = new OrderResponse();
 
-        processOrderResponse.setId( entity.getId() );
-        processOrderResponse.setIdCustomer( entity.getIdCustomer() );
-        processOrderResponse.setStatus( entity.getStatus() );
-        processOrderResponse.setItems( itemEntityListToProcessOrderItemResponseList( entity.getItems() ) );
+        orderResponse.setId( entity.getId() );
+        orderResponse.setIdCustomer( entity.getIdCustomer() );
+        orderResponse.setStatus( entity.getStatus() );
+        orderResponse.setItems( itemEntityListToOrderItemResponseList( entity.getItems() ) );
 
-        return processOrderResponse;
+        return orderResponse;
     }
 
-    protected ItemEntity processOrderItemRequestToItemEntity(ProcessOrderItemRequest processOrderItemRequest) {
-        if ( processOrderItemRequest == null ) {
+    protected ItemEntity orderItemRequestToItemEntity(OrderItemRequest orderItemRequest) {
+        if ( orderItemRequest == null ) {
             return null;
         }
 
         ItemEntity itemEntity = new ItemEntity();
 
-        itemEntity.setQuantity( processOrderItemRequest.getQuantity() );
-        itemEntity.setDescription( processOrderItemRequest.getDescription() );
-        itemEntity.setPrice( processOrderItemRequest.getPrice() );
+        itemEntity.setQuantity( orderItemRequest.getQuantity() );
+        itemEntity.setDescription( orderItemRequest.getDescription() );
+        itemEntity.setPrice( orderItemRequest.getPrice() );
 
         return itemEntity;
     }
 
-    protected List<ItemEntity> processOrderItemRequestListToItemEntityList(List<ProcessOrderItemRequest> list) {
+    protected List<ItemEntity> orderItemRequestListToItemEntityList(List<OrderItemRequest> list) {
         if ( list == null ) {
             return null;
         }
 
         List<ItemEntity> list1 = new ArrayList<ItemEntity>( list.size() );
-        for ( ProcessOrderItemRequest processOrderItemRequest : list ) {
-            list1.add( processOrderItemRequestToItemEntity( processOrderItemRequest ) );
+        for ( OrderItemRequest orderItemRequest : list ) {
+            list1.add( orderItemRequestToItemEntity( orderItemRequest ) );
         }
 
         return list1;
     }
 
-    protected ProcessOrderItemRequest itemEntityToProcessOrderItemRequest(ItemEntity itemEntity) {
+    protected OrderItemRequest itemEntityToOrderItemRequest(ItemEntity itemEntity) {
         if ( itemEntity == null ) {
             return null;
         }
 
-        ProcessOrderItemRequest processOrderItemRequest = new ProcessOrderItemRequest();
+        OrderItemRequest orderItemRequest = new OrderItemRequest();
 
-        processOrderItemRequest.setQuantity( itemEntity.getQuantity() );
-        processOrderItemRequest.setDescription( itemEntity.getDescription() );
-        processOrderItemRequest.setPrice( itemEntity.getPrice() );
+        orderItemRequest.setQuantity( itemEntity.getQuantity() );
+        orderItemRequest.setDescription( itemEntity.getDescription() );
+        orderItemRequest.setPrice( itemEntity.getPrice() );
 
-        return processOrderItemRequest;
+        return orderItemRequest;
     }
 
-    protected List<ProcessOrderItemRequest> itemEntityListToProcessOrderItemRequestList(List<ItemEntity> list) {
+    protected List<OrderItemRequest> itemEntityListToOrderItemRequestList(List<ItemEntity> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<ProcessOrderItemRequest> list1 = new ArrayList<ProcessOrderItemRequest>( list.size() );
+        List<OrderItemRequest> list1 = new ArrayList<OrderItemRequest>( list.size() );
         for ( ItemEntity itemEntity : list ) {
-            list1.add( itemEntityToProcessOrderItemRequest( itemEntity ) );
+            list1.add( itemEntityToOrderItemRequest( itemEntity ) );
         }
 
         return list1;
     }
 
-    protected ProcessOrderItemResponse itemEntityToProcessOrderItemResponse(ItemEntity itemEntity) {
+    protected OrderItemResponse itemEntityToOrderItemResponse(ItemEntity itemEntity) {
         if ( itemEntity == null ) {
             return null;
         }
 
-        ProcessOrderItemResponse processOrderItemResponse = new ProcessOrderItemResponse();
+        OrderItemResponse orderItemResponse = new OrderItemResponse();
 
-        processOrderItemResponse.setId( itemEntity.getId() );
-        processOrderItemResponse.setQuantity( itemEntity.getQuantity() );
-        processOrderItemResponse.setDescription( itemEntity.getDescription() );
-        processOrderItemResponse.setPrice( itemEntity.getPrice() );
+        orderItemResponse.setId( itemEntity.getId() );
+        orderItemResponse.setQuantity( itemEntity.getQuantity() );
+        orderItemResponse.setDescription( itemEntity.getDescription() );
+        orderItemResponse.setPrice( itemEntity.getPrice() );
 
-        return processOrderItemResponse;
+        return orderItemResponse;
     }
 
-    protected List<ProcessOrderItemResponse> itemEntityListToProcessOrderItemResponseList(List<ItemEntity> list) {
+    protected List<OrderItemResponse> itemEntityListToOrderItemResponseList(List<ItemEntity> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<ProcessOrderItemResponse> list1 = new ArrayList<ProcessOrderItemResponse>( list.size() );
+        List<OrderItemResponse> list1 = new ArrayList<OrderItemResponse>( list.size() );
         for ( ItemEntity itemEntity : list ) {
-            list1.add( itemEntityToProcessOrderItemResponse( itemEntity ) );
+            list1.add( itemEntityToOrderItemResponse( itemEntity ) );
         }
 
         return list1;

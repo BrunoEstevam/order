@@ -6,16 +6,21 @@ pipeline {
         maven 'Maven 3.9.9'
      }
 
+    environment {
+        BRANCH = env.GIT_BRANCH
+    }
+
 	stages {
 
-		stage('Build'){
+		stage('build'){
 			steps {
+			    sh "env.BRANCH"
 			    sh "java --version"
 				sh "mvn clean install -DskipTests"
 			}
 		}
 
-		stage('Test'){
+		stage('test'){
 			steps{
 				sh "mvn test"
 			}

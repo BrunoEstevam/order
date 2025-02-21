@@ -9,6 +9,7 @@ pipeline {
 
 		stage('Build'){
 			steps {
+			    echo java --version
 				sh "mvn clean install -DskipTests"
 			}
 		}

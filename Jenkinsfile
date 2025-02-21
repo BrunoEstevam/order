@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
 	 tools {
-        maven 'Maven 3.9.9'  // Nome definido na configuração do Maven
+        maven 'Maven 3.9.9'
      }
 
 	stages {

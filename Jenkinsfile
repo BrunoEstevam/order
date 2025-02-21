@@ -5,10 +5,6 @@ pipeline {
 		mavenHome = tool 'jenkins-maven'
 	}
 
-	tools {
-		jdk 'java-21'
-	}
-
 	stages {
 
 		stage('Build'){

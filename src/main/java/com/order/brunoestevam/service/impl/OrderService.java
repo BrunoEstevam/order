@@ -15,39 +15,39 @@ import com.order.brunoestevam.service.MessasingProducerService;
 @Service
 public class OrderService {
 
-	private final OrderRepository repository;
+    private final OrderRepository repository;
 
-	private final IdempotenteService idempotenteService;
+    private final IdempotenteService idempotenteService;
 
-	private final MessasingProducerService messasingProducerService;
+    private final MessasingProducerService messasingProducerService;
 
-	public OrderService(OrderRepository repository, IdempotenteService idempotenteService,
-			OrderProcessorFactory factory, MessasingProducerService messasingProducerService) {
-		this.repository = repository;
-		this.idempotenteService = idempotenteService;
-		this.messasingProducerService = messasingProducerService;
-	}
+    public OrderService(OrderRepository repository, IdempotenteService idempotenteService,
+                        OrderProcessorFactory factory, MessasingProducerService messasingProducerService) {
+        this.repository = repository;
+        this.idempotenteService = idempotenteService;
+        this.messasingProducerService = messasingProducerService;
+    }
 
-	public OrderResponse save(OrderEntity order, String idempotenteKey) {
-		idempotenteService.validateAndPut(idempotenteKey);
+    public OrderResponse save(OrderEntity order, String idempotenteKey) {
+        idempotenteService.validateAndPut(idempotenteKey);
 
-		order.setStatus(OrderStatusEnum.PENDING.getCode());
-		order.setIdempotentKey(idempotenteKey);
-		associateItemsToOrder(order);
-		
-		repository.save(order);
-		messasingProducerService.sendOrder(new OrderMessageRequest(order.getId(), order.getStatus()));
+        order.setStatus(OrderStatusEnum.PENDING.getCode());
+        order.setIdempotentKey(idempotenteKey);
+        associateItemsToOrder(order);
 
-		return OrderMapper.INSTANCE.mapToResponse(order);
-	}
+        repository.save(order);
+        messasingProducerService.sendOrder(new OrderMessageRequest(order.getId(), order.getStatus()));
 
-	private void associateItemsToOrder(OrderEntity order) {
-		for (ItemEntity item : order.getItems()) {
-			item.setOrder(order);
-		}
-	}
+        return OrderMapper.INSTANCE.mapToResponse(order);
+    }
 
-	public OrderEntity findById(Long id) throws InterruptedException {
-		return repository.findById(id).orElseThrow();
-	}
+    private void associateItemsToOrder(OrderEntity order) {
+        for (ItemEntity item : order.getItems()) {
+            item.setOrder(order);
+        }
+    }
+
+    public OrderEntity findById(Long id) {
+        return repository.findById(id).orElseThrow();
+    }
 }
